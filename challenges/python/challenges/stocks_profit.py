@@ -1,5 +1,7 @@
+""" Does not work for all test cases """
+
+
 def find_pairs(target, stocks_profit):
-    """ Does not work for all test cases """
     pairs = []
     result = 0
 
