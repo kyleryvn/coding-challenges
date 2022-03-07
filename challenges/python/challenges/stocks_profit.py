@@ -1,9 +1,9 @@
-""" Does not work for all test cases """
-
-
 def find_pairs(target, stocks_profit):
     pairs = []
     result = 0
+
+    if stocks_profit.__len__ == 0:
+        return 0
 
     for i in range(len(stocks_profit)):
         current = stocks_profit[i]
