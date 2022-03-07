@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.others;
+package others;
 
 /*
  * Efficient Approach: The approach can be optimized using hashing.

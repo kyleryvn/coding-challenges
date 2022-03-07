@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.jpmorgan;
+package jpmorgan;
 
 /*
  * For example, 2020 is a four-digit self describing number:

@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.ibm;
+package ibm;
 
 import java.util.Collections;
 import java.util.List;

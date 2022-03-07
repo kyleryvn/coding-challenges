@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.others;
+package others;
 
 import com.google.gson.Gson;
 

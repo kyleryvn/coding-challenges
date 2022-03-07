@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.zocdoc;
+package zocdoc;
 
 /*
  * Given an array of strings, remove each string that is an anagram of an earlier string,

@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.jpmorgan;
+package jpmorgan;
 
 public class JumbledNumbers {
 

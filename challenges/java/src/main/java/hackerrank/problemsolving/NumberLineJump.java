@@ -1,4 +1,4 @@
-package com.github.kyleryvn.challenges.hackerrank.problemsolving;
+package hackerrank.problemsolving;
 
 public class NumberLineJump {
 
