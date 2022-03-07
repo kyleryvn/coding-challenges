@@ -1,4 +1,5 @@
 def find_pairs(target, stocks_profit):
+    """ Does not work for all test cases """
     pairs = []
     result = 0
 
@@ -12,10 +13,3 @@ def find_pairs(target, stocks_profit):
                 result += 1
 
     return result
-
-
-if __name__ == "__main__":
-    profit_target = 47
-    profits = [1, 3, 5, 46, 1, 9, 2, 45]
-    count = find_pairs(profit_target, profits)
-    print(count)
