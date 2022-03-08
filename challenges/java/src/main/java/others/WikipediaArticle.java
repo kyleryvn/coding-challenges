@@ -37,9 +37,7 @@ public class WikipediaArticle {
                     // Extract nested objects
                     JsonObject parseChildObject = rootObject.getAsJsonObject("parse"); // 'parse' is child of root
                     JsonObject textChildObject = parseChildObject.getAsJsonObject("text"); // 'text' is child of parse
-                    String asterisk = textChildObject.get("*").toString()
-                            .replaceAll("[0-9[^\\w\\s-_]]", "") // replace all numbers and special characters
-                            .toLowerCase();
+                    String asterisk = textChildObject.get("*").toString().toLowerCase(); // Convert to lowercase because matcher is case sensitive
 
                     Pattern pattern = Pattern.compile(topic);
                     Matcher matcher = pattern.matcher(asterisk);
