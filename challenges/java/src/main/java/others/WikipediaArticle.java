@@ -42,7 +42,7 @@ public class WikipediaArticle {
                     Pattern pattern = Pattern.compile(topic);
                     Matcher matcher = pattern.matcher(asterisk);
 
-                    // Search resulting JSON text for topic string
+                    // Search text for topic string
                     while (matcher.find()) {
                         count++;
                     }
