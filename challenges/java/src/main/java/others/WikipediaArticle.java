@@ -43,6 +43,7 @@ public class WikipediaArticle {
                     Matcher matcher = pattern.matcher(asterisk);
 
                     // Search text for topic string
+                    // Increment count when match occurs
                     while (matcher.find()) {
                         count++;
                     }
