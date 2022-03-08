@@ -1,38 +1,57 @@
 package others;
 
-import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WikipediaArticle {
 
     public int getTopicCount(String topic) {
+        String url = "https://en.wikipedia.org/w/api.php?action=parse&section=0&prop=text&format=json&page=" + topic;
         int count = 0;
 
         try {
-            URL url = new URL("https://en.wikipedia.org/w/api.php?action=parse&section=0&prop=text&format=json&page=" + topic);
-            Scanner scan = new Scanner(url.openStream());
-            StringBuffer sb = new StringBuffer();
+            URL link = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) link.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+            int responseCode = connection.getResponseCode();
 
-            while (scan.hasNext()) {
-                sb.append(scan.next());
-            }
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+                try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    JsonElement jsonElement = JsonParser.parseReader(bufferedReader);
 
-            StringTokenizer st = new StringTokenizer(sb.toString());
+                    // Get root object
+                    JsonObject rootObject = jsonElement.getAsJsonObject();
 
-            while(st.hasMoreTokens()) {
-                String word = st.nextToken().toString();
-                if(word.equalsIgnoreCase(topic)){
-                    count++;
+                    // Extract nested objects
+                    JsonObject parseChildObject = rootObject.getAsJsonObject("parse"); // 'parse' is child of root
+                    JsonObject textChildObject = parseChildObject.getAsJsonObject("text"); // 'text' is child of parse
+                    String asterisk = textChildObject.get("*").toString()
+                            .replaceAll("[0-9[^\\w\\s-_]]", "") // replace all numbers and special characters
+                            .toLowerCase();
+
+                    Pattern pattern = Pattern.compile(topic);
+                    Matcher matcher = pattern.matcher(asterisk);
+
+                    // Search resulting JSON text for topic string
+                    while (matcher.find()) {
+                        count++;
+                    }
                 }
             }
 
-            //String result = sb.toString();
-            System.out.println(count);
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
